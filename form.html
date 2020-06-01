@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+      /* Style all input fields */
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px; 
+    }
+
+     /* Style the submit button */
+    input[type=submit] {
+    background-color: rgb(86, 76, 175);
+    color: white;
+    }
+
+    /* Style the container for inputs */
+    .container {
+    background-color: #f1f1f1;
+    padding: 20px;
+   }
+
+   /* The message box is shown when the user clicks on the password field */
+#message {
+    display: none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+#message p {
+    padding: 10px 35px;
+    font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+    color: green;
+}
+
+.valid:before {
+    position: relative;
+    left: -35px;
+    content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -35px;
+    content: "✖";
+}
+
+
+    span{
+        color: red;
+    }
+       
+    </style>
+</head>
+
+<body>
+
+    <h1>Welcome to the Registration Page</h1>
+    
+    <div class="container">
+
+        <form  name = "myform" id="form"  onsubmit=" return myfunction() ;" action="javascript:check();" autocomplete="off" >
+
+            <label for="firstname"><b>First Name</b></label>
+            <input type="text" placeholder="Enter First Name" name="firstname" required><br></br>
+
+            <label for="lastname"><b>Last Name</b></label>
+            <input type="text" placeholder="Enter Last Name" name="lastname" required><br></br>
+
+            
+            Number phone: <input type="text"  id="mobilenumber" name="Number" value="" onkeydown="myfunction">
+            <span id="messages"></span><br></br>
+
+            Email:<input type="text" id="email" name="Email" value="" onkeydown="myfunction">          
+            <span id="text"></span><br></br>
+    
+            <label for="adress"><b>Adress</b></label>
+            <input type="text" placeholder="Enter Adress" name="adress" required><br></br>
+
+            Password: <input type="text" placeholder="Password" id="t1" /> 
+            <br/> 
+            <br/> 
+           <input type="button" value="checking password " onclick="test_str()" /> 
+            <br/> 
+           <br/> Validity of password: <input type="text" id="t2" readonly/> 
+            
+            <input type="radio" name="gender" value="male"> Male<br>
+            <input type="radio" name="gender" value="female"> Female<br>
+
+            <input type="submit" value="Submit" >  
+
+        </form>
+    </div>
+
+
+<script>
+    function myfunction(){
+
+        var a = document.getElementById("mobilenumber").value;
+
+        var form =document.getElementById("form");
+        var email = document.getElementById("email").value;
+        var text = document.getElementById("text");
+        var pattern =/^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+        if(isNaN(a)){
+            document.getElementById("messages").innerHTML="enter only numeric number";
+            return false;
+        }
+        if(a.length>11){
+            document.getElementById("messages").innerHTML="mobile number must be 11 digit";
+            return false;
+        }
+        if(a.length<11){
+            document.getElementById("messages").innerHTML="mobile number must be 11 digit";
+            return false;
+        }          
+
+        if(email.match(pattern)){
+         form.classList.add("valid");
+         form.classList.remove("invalid");
+         text.innerHTML="Your Email Adress in Valid";
+        }
+
+       else{
+        form.classList.remove("valid");
+         form.classList.add("invalid");  
+         text.innerHTML="please Enter Valid Email Address";
+         return false;
+        }
+
+    }
+
+    function check(){
+        if(confirm('Welcom..\nDo you want to move to home page?'))
+       {
+       window.location.assign("p1.html");
+        }
+
+    }
+
+</script>
+
+<script type="text/javascript"> 
+
+    function test_str() { 
+        var res; 
+        var reWhiteSpace = new RegExp("/^\s+$/");
+        var str = document.getElementById("t1").value; 
+
+        if (str.match(/[a-z]/g) && str.match(  /[A-Z]/g) && str.match( /[0-9]/g) && str.match( /[^a-zA-Z\d]/g) && str.length == 8 &&str.length == str.replace(" ", "").length ) 
+            res = "Accepted "; 
+
+        else 
+            res="Not accepted";
+            
+        document.getElementById("t2").value = res; 
+
+    } 
+    
+
+</script> 
+
+
+</body>
+
+</html>
